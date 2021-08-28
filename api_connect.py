@@ -2,6 +2,8 @@ import requests
 import pandas as pd
 import configparser
 import json
+import time
+from datetime import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -21,15 +23,14 @@ class ChallengerPlayers:
     # TODO: Verification system
     def __init__(self):
 
-        # self.get_challengers_data()
-        # self.get_summoners_data()
-
+        self.get_challengers_data()
+        self.get_summoners_data()
         self.get_matches_by_summoner()
 
     def get_challengers_data(self):
         """
-
-        :return:
+        Pega informações dos players do challenger no dia
+        :return: challengers_df
         """
 
         challengers_data = requests.get('https://br1.api.riotgames.com/tft/league/v1/challenger', headers=HEADER)
@@ -37,8 +38,8 @@ class ChallengerPlayers:
 
     def get_summoners_data(self):
         """
-
-        :return:
+        Para cada jogador no df de jogadores pega os dados de summoner
+        :return: summ_data_df
         """
 
         summ_list = []
@@ -50,12 +51,12 @@ class ChallengerPlayers:
         summ_data_df = pd.DataFrame(summ_list)
 
         self.summ_joined = pd.merge(self.challengers_df, summ_data_df, left_on='summonerId', right_on='id', how='inner')
-        self.summ_joined.to_csv('data/challengers_data/joined_temp.csv')
+        self.summ_joined.to_csv(f'data/challengers_data/joined_temp_{datetime.today()}.csv')
         print(self.summ_joined)
 
     def get_matches_by_summoner(self):
         """
-
+        Para cada jogador pega os ids das partidas
         :return:
         """
 
@@ -73,6 +74,42 @@ class ChallengerPlayers:
         matches_id_df = pd.DataFrame(matches_list)
 
         matches_id_df.to_csv('data/challengers_data/matches_ids.csv')
+
+
+class PlayerData():
+
+    def __init__(self, name):
+
+        self.name = name
+        self.get_player_ids()
+        self.get_player_matches()
+    def get_player_ids(self):
+
+
+        print(f'getting player_ids for {self.name}')
+        player_ids = requests.get(f'https://br1.api.riotgames.com/tft/summoner/v1/summoners/by-name/{self.name}',
+                                  headers=HEADER)
+
+        print(player_ids.json())
+        self.player_ids = player_ids.json()
+
+    def get_player_matches(self):
+
+        puuid = self.player_ids['puuid']
+        print(puuid)
+
+        player_matches = requests.get(
+            f'https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/OAYf88iAsSwE1bWxVf9wTSKE-ugoEMNVG_PBDuU3FM3ObSiqfzTHFnutIaaDKR4Pdr8iE4AtSfqpjw/ids?count=200',
+            headers=HEADER
+        )
+
+        print(player_matches.status_code)
+        print(player_matches.json())
+        print(len(player_matches.json()))
+        pd.DataFrame(player_matches.json()).to_csv(
+            f'data/matches/{self.name}_match_ids.csv')
+
+
 
 
 
@@ -109,14 +146,25 @@ class MatchData:
             match_data = requests.get(f'https://americas.api.riotgames.com/tft/match/v1/matches/{match}',
                                       headers=HEADER)
 
-            print(match_data.json())
-            with open('data/raw_matchdata.txt', 'w') as outfile:
-                json.dump(match_data.json(), outfile)
+            if match_data.status_code == 200:
+                data_list.append(match_data.json())
+
+                print(match_data.json())
+
+            else:
+                print('dormindo...')
+                time.sleep(120)
+                print('acordando...')
+
+        with open('data/raw_matchdata.json', 'w') as outfile:
+            json.dump(data_list, outfile)
 
 
 
 
-matches = pd.read_csv('data/challengers_data/matches_ids.csv', index_col=[0])['0'].tolist()
-
+matches = pd.read_csv('data/matches/Tataba_match_ids.csv', index_col=[0])['0'].tolist()\
+#
 MatchData(matches=matches)
 
+
+# PlayerData('Tataba')
