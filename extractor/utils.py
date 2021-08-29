@@ -20,6 +20,10 @@ class MongoDB:
         else:
             return False
 
+    def insert_one(self, document):
+
+        return self.collection_obj.insert_one(document)
+
     def insert_documents(self, document_list):
 
         return self.collection_obj.insert_many(document_list)

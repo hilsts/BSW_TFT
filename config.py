@@ -10,15 +10,23 @@ API_KEY = config['API']['key']
 
 # Configs
 
+## Default regions  ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']
 REGIONS = ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']
+## Default leagues
+# {
+#     'high_elo' : ['challenger', 'grandmaster', 'master'],
+#     'low_elo' : ['DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE', 'IRON'],
+#     'tiers' : ['I', 'II', 'III', 'IV']
+#            }
+##
 LEAGUES = {
-    'highelo' : ['challenger', 'grandmaster', 'master'],
-    'lowelo' : ['diamond', 'platinum', 'gold', 'silver', 'bronze', 'iron'],
+    'high_elo' : ['challenger', 'grandmaster', 'master'],
+    'low_elo' : ['DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE', 'IRON'],
     'tiers' : ['I', 'II', 'III', 'IV']
            }
 
 
-#API
+# API
 
 BASE_URL = 'https://{region}.api.riotgames.com/tft/{api_name}/v1/{api_call}'
 
@@ -38,8 +46,6 @@ LEAGUE_GRANDMASTER_URL = BASE_URL.format(api_name='league', api_call='grandmaste
 LEAGUE_MASTER_URL = BASE_URL.format(api_name='league', api_call='master', region='{region}')
 LEAGUE_TIERS_URL = BASE_URL.format(api_name='league', api_call='entries/{tier}/{division}', region='{region}')
 
-print(LEAGUE_MASTER_URL)
-print(LEAGUE_GRANDMASTER_URL)
-print(LEAGUE_CHALLENGER_URL)
-print(LEAGUE_TIERS_URL)
-print(API_KEY)
+## TFT-SUMMONER-V1
+
+SUMMONER_BY_ID = BASE_URL.format(api_name='summoner', api_call='summoners', region='{region}')
