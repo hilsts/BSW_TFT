@@ -2,6 +2,9 @@
 #TODO: MariaDB Class
 from pymongo import MongoClient
 import configparser
+import config
+import requests
+import time
 
 
 class MongoDB:
@@ -31,6 +34,29 @@ class MongoDB:
     def query_documents(self, query):
 
         return self.collection_obj.find(query)
+
+class API:
+
+    def __init__(self):
+
+        self.header = config.HEADER
+
+    def get_from_url(self, url):
+
+        r = requests.get(url, headers=self.header)
+
+        if r.status_code == 200:
+
+            print(url)
+            print(r.json())
+            return r.json()
+
+        else:
+
+            print(f'dormindo no get: {url}')
+            time.sleep(200)
+            return self.get_from_url(url)
+
 
 
 MongoDB('league_summoner')
