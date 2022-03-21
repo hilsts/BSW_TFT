@@ -38,7 +38,5 @@ class Summoner:
 
     def get_summoner_by_id(self, summoner_id):
 
-        print('oi')
+        # TODO: verify and get of summoners
 
-
-Summoner('br1').get_summoners_from_db()
