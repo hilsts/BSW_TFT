@@ -1,7 +1,7 @@
 import configparser
 
 
-CONFIG_PATH = '/home/hilsts/config.ini'
+CONFIG_PATH = '/Users/hilsts/Documents/tft_config.ini'
 
 config = configparser.ConfigParser()
 config.read(CONFIG_PATH)
@@ -9,6 +9,14 @@ config.read(CONFIG_PATH)
 API_KEY = config['API']['key']
 
 # Configs
+
+## File system
+
+FILE_SYSTEM_ROOT = '/Users/hilsts/Documents/'
+
+## MongoDB
+
+MONGO_CONFIG = config['MONGO']
 
 ## Default regions  ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']
 REGIONS = ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']

@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0e052fb-0f9f-4e23-a7c0-e266985344cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/extractor/league.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BSW_TFT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BSW_TFT.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extractor/league_summoner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extractor/league.py" beforeDir="false" afterPath="$PROJECT_DIR$/extractor/league.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extractor/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/extractor/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +38,9 @@
       </set>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1piMvqJznFmMuJDEGjHPAqMQzUO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -51,14 +54,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/old_data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.summoner">
+  <component name="RunManager" selected="Python.league">
     <configuration name="api_connect" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="BSW_TFT" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -145,8 +148,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.league" />
         <item itemvalue="Python.summoner" />
-        <item itemvalue="Python.league_summoner" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.api_connect" />
       </list>
@@ -173,6 +176,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

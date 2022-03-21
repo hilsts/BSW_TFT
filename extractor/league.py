@@ -1,14 +1,16 @@
 import config
 import requests
-from utils import MongoDB
+from utils import MongoDB, FileSystem
 
 class League:
 
-    def __init__(self, region):
+    def __init__(self, region, save_mode="file"):
 
+
+        self.save_mode = save_mode
         self.region = region
         self.base_url = config.BASE_URL.format(region=self.region, api_name='league', api_call='{api_call}')
-        self.mongo_client = MongoDB('league')
+
 
     def get_high_elo(self):
 
@@ -21,8 +23,8 @@ class League:
             )
 
             league_data = r.json()
-            x = self.mongo_client.insert_one(league_data)
-            print(x.inserted_id)
+            print(league_data)
+            self.save(league_data)
 
     def get_low_elo(self):
 
@@ -58,21 +60,31 @@ class League:
                     )
                     temp_ += r.json()
 
-                x = self.mongo_client.insert_one(
-                    {
+                obj = {
                         'region' : self.region,
                         'tier': league,
                         'division': tier,
                         'entries': temp_
                     }
-                )
 
-                print(x.inserted_id)
-
+                self.save(obj)
 
 
+    def save(self, object):
 
-League('br1').get_low_elo()
+        if self.save_mode == "file":
+
+            file = FileSystem()
+            file.write_to_path('/league.json', object)
+
+        if self.save_mode == 'mongo':
+
+            self.mongo_client = MongoDB('league')
+            x = self.mongo_client.insert_one(object)
+            print(x.inserted_id)
+
+
+
 League('br1').get_high_elo()
 
 

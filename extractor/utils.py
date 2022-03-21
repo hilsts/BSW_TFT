@@ -1,17 +1,15 @@
-# TODO: MongoDB Class
-#TODO: MariaDB Class
 from pymongo import MongoClient
-import configparser
-
+import config
+import json
 
 class MongoDB:
 
     def __init__(self, collection):
 
         config = configparser.ConfigParser()
-        config.read('/home/hilsts/config.ini')
-        client = MongoClient('localhost', 27017)
-        self.collection_obj = client[config['MONGODB']['dbname']][collection]
+        mongo = config.MONGO_CONFIG
+        client = MongoClient(mongo['host'], mongo['port'])
+        self.collection_obj = client[mongo['dbname']][collection]
 
     def verify_first(self):
 
@@ -33,10 +31,19 @@ class MongoDB:
         return self.collection_obj.find(query)
 
 
-MongoDB('league_summoner')
+class FileSystem():
+
+    def __init__(self):
+
+        self.root_path = config.FILE_SYSTEM_ROOT
+
+    def write_to_path(self, path, document):
+
+        with open(self.root_path+path, 'w') as json_file:
+            json.dump(document, json_file)
 
 
-
+    def contruct_path(self):
         
 
 
