@@ -1,12 +1,13 @@
 from pymongo import MongoClient
 import config
 import json
+from datetime import datetime
+
 
 class MongoDB:
 
     def __init__(self, collection):
 
-        config = configparser.ConfigParser()
         mongo = config.MONGO_CONFIG
         client = MongoClient(mongo['host'], mongo['port'])
         self.collection_obj = client[mongo['dbname']][collection]
@@ -38,14 +39,32 @@ class FileSystem():
         self.root_path = config.FILE_SYSTEM_ROOT
 
     def write_to_path(self, path, document):
+        try:
+            print('write to path')
+            print(self.root_path+path)
+            with open(self.root_path+path, 'w') as json_file:
+                json.dump(document, json_file)
+        except FileNotFoundError:
+            print('except')
 
-        with open(self.root_path+path, 'w') as json_file:
-            json.dump(document, json_file)
 
+            dir_path = self.contruct_path(self.name, root=True)
+            os.mkdir(self.root_path+dir_path)
+            file_path = self.contruct_path(self.name)
+            self.write_to_path(file_path, document)
 
-    def contruct_path(self):
-
+    def contruct_path(self, name, root=False):
+        self.name = name
         # TODO: construct save_path to filesystem
-        
+        if root:
+            print(f'root: {name}')
+            return f'/{name}/'
 
+        print(f'/{name}/{datetime.now()}.json')
+        return f'{name}/{datetime.now()}.json'
+
+    def create_dir(self, path):
+
+        import os
+        os.mkdir(self.root_path + path)
 

@@ -12,7 +12,7 @@ API_KEY = config['API']['key']
 
 ## File system
 
-FILE_SYSTEM_ROOT = '/Users/hilsts/Documents/'
+FILE_SYSTEM_ROOT = '/Users/hilsts/Documents/TFT_data/'
 
 ## MongoDB
 
@@ -27,6 +27,7 @@ REGIONS = ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru',
 #     'tiers' : ['I', 'II', 'III', 'IV']
 #            }
 ##
+
 LEAGUES = {
     'high_elo' : ['challenger', 'grandmaster', 'master'],
     'low_elo' : ['DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE', 'IRON'],

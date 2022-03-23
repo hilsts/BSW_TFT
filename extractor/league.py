@@ -2,20 +2,18 @@ import config
 import requests
 from utils import MongoDB, FileSystem
 
+
 class League:
 
     def __init__(self, region, save_mode="file"):
-
 
         self.save_mode = save_mode
         self.region = region
         self.base_url = config.BASE_URL.format(region=self.region, api_name='league', api_call='{api_call}')
 
-
     def get_high_elo(self):
 
         for league in config.LEAGUES['high_elo']:
-
 
             r = requests.get(
                 self.base_url.format(api_call=league),
@@ -23,7 +21,7 @@ class League:
             )
 
             league_data = r.json()
-            print(league_data)
+            # print(league_data)
             self.save(league_data)
 
     def get_low_elo(self):
@@ -37,10 +35,10 @@ class League:
                 print(league)
                 print(tier)
                 league_tier_url = config.LEAGUE_TIERS_URL.format(region=self.region,
-                                                     tier=league,
-                                                     division=tier)
+                                                                 tier=league,
+                                                                 division=tier)
 
-                league_tier_url_p =  league_tier_url + f'?page={page}'
+                league_tier_url_p = league_tier_url + f'?page={page}'
 
                 r = requests.get(
                     league_tier_url_p,
@@ -61,7 +59,7 @@ class League:
                     temp_ += r.json()
 
                 obj = {
-                        'region' : self.region,
+                        'region': self.region,
                         'tier': league,
                         'division': tier,
                         'entries': temp_
@@ -69,24 +67,20 @@ class League:
 
                 self.save(obj)
 
-
-    def save(self, object):
+    def save(self, obj):
 
         if self.save_mode == "file":
 
             file = FileSystem()
-            file.write_to_path('/league.json', object)
+            path = file.contruct_path('league')
+            print(f'path save 1: {path}')
+            file.write_to_path(path, obj)
 
         if self.save_mode == 'mongo':
 
             self.mongo_client = MongoDB('league')
-            x = self.mongo_client.insert_one(object)
+            x = self.mongo_client.insert_one(obj)
             print(x.inserted_id)
 
 
-
 League('br1').get_high_elo()
-
-
-
-
