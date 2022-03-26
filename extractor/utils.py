@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import config
 import json
 from datetime import datetime
+import os
 
 
 class MongoDB:
@@ -65,6 +66,9 @@ class FileSystem():
 
     def create_dir(self, path):
 
-        import os
         os.mkdir(self.root_path + path)
+
+    def verify_root(self):
+
+        return os.path.isdir(config.FILE_SYSTEM_ROOT)
 

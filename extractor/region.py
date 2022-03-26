@@ -1,5 +1,5 @@
 import config
-from utils import FileSystem
+from extractor.utils import FileSystem
 
 
 class Region:
@@ -9,13 +9,11 @@ class Region:
 
     def create_folders(self):
 
-
-
         fs = FileSystem()
 
-        fs.create_dir('')
-        for region in self.regions_list:
-            fs.create_dir(region)
-
-
-Region().create_folders()
+        if fs.verify_root():
+            return 0
+        else:
+            fs.create_dir('')
+            for region in self.regions_list:
+                fs.create_dir(region)

@@ -1,6 +1,6 @@
 import config
 import requests
-from utils import MongoDB, FileSystem
+from extractor.utils import MongoDB, FileSystem
 
 
 class League:
@@ -72,7 +72,7 @@ class League:
         if self.save_mode == "file":
 
             file = FileSystem()
-            path = file.contruct_path('league')
+            path = file.contruct_path(f'{self.region}/league')
             print(f'path save 1: {path}')
             file.write_to_path(path, obj)
 
@@ -82,5 +82,3 @@ class League:
             x = self.mongo_client.insert_one(obj)
             print(x.inserted_id)
 
-
-League('br1').get_high_elo()
