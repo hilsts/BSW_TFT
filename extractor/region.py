@@ -1,5 +1,5 @@
-import config
-from extractor.utils import FileSystem
+import BSW_TFT.config as config
+from BSW_TFT.extractor.utils import FileSystem
 
 
 class Region:

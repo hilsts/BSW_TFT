@@ -1,4 +1,7 @@
 import configparser
+from airflow.models import Variable
+
+api = Variable.get("api_key")
 
 
 CONFIG_PATH = '/Users/hilsts/Documents/tft_config.ini'
@@ -6,17 +9,17 @@ CONFIG_PATH = '/Users/hilsts/Documents/tft_config.ini'
 config = configparser.ConfigParser()
 config.read(CONFIG_PATH)
 
-API_KEY = config['API']['key']
-
+#API_KEY = config['API']['key']
+API_KEY = api
 # Configs
 
 ## File system
 
-FILE_SYSTEM_ROOT = '/Users/hilsts/Documents/TFT_data/'
+FILE_SYSTEM_ROOT = '/tmp/'
 
 ## MongoDB
 
-MONGO_CONFIG = config['MONGO']
+#MONGO_CONFIG = config['MONGO']
 
 ## Default regions  ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']
 REGIONS = ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']

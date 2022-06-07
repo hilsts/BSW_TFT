@@ -1,6 +1,6 @@
-import config
+import BSW_TFT.config as config
 import requests
-from extractor.utils import MongoDB, FileSystem
+from BSW_TFT.extractor.utils import FileSystem
 
 
 class League:
@@ -22,7 +22,8 @@ class League:
 
             league_data = r.json()
             # print(league_data)
-            self.save(league_data)
+            # self.save(league_data)
+            print(league_data)
 
     def get_low_elo(self):
 
@@ -76,9 +77,9 @@ class League:
             print(f'path save 1: {path}')
             file.write_to_path(path, obj)
 
-        if self.save_mode == 'mongo':
+        # if self.save_mode == 'mongo':
 
-            self.mongo_client = MongoDB('league')
-            x = self.mongo_client.insert_one(obj)
-            print(x.inserted_id)
+        #     self.mongo_client = MongoDB('league')
+        #     x = self.mongo_client.insert_one(obj)
+        #     print(x.inserted_id)
 

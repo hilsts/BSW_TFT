@@ -1,36 +1,36 @@
-from pymongo import MongoClient
-import config
+#from pymongo import MongoClient
+import BSW_TFT.config as config
 import json
 from datetime import datetime
 import os
 
 
-class MongoDB:
+# class MongoDB:
 
-    def __init__(self, collection):
+#     def __init__(self, collection):
 
-        mongo = config.MONGO_CONFIG
-        client = MongoClient(mongo['host'], mongo['port'])
-        self.collection_obj = client[mongo['dbname']][collection]
+#         mongo = config.MONGO_CONFIG
+#         client = MongoClient(mongo['host'], mongo['port'])
+#         self.collection_obj = client[mongo['dbname']][collection]
 
-    def verify_first(self):
+#     def verify_first(self):
 
-        if self.collection_obj.count_documents({}) == 0:
-            return True
-        else:
-            return False
+#         if self.collection_obj.count_documents({}) == 0:
+#             return True
+#         else:
+#             return False
 
-    def insert_one(self, document):
+#     def insert_one(self, document):
 
-        return self.collection_obj.insert_one(document)
+#         return self.collection_obj.insert_one(document)
 
-    def insert_documents(self, document_list):
+#     def insert_documents(self, document_list):
 
-        return self.collection_obj.insert_many(document_list)
+#         return self.collection_obj.insert_many(document_list)
 
-    def query_documents(self, query):
+#     def query_documents(self, query):
 
-        return self.collection_obj.find(query)
+#         return self.collection_obj.find(query)
 
 
 class FileSystem():

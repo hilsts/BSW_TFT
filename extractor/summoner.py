@@ -1,6 +1,6 @@
-import config
+import BSW_TFT.config as config
 import requests
-from utils import MongoDB
+# from utils import MongoDB
 
 class Summoner:
 
