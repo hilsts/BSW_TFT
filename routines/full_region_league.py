@@ -1,5 +1,5 @@
-from BSW_TFT.extractor.region import Region
-from BSW_TFT.extractor.league import League
+from extractor.region import Region
+from extractor.league import League
 
 # TODO: First full pipeline, region to league range. Create filesystem and save all leagues.
 

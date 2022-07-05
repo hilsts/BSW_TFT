@@ -1,5 +1,5 @@
 #from pymongo import MongoClient
-import BSW_TFT.config as config
+import config as config
 import json
 from datetime import datetime
 import os
