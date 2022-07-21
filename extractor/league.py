@@ -1,6 +1,6 @@
 import BSW_TFT.config as config
 import requests
-from BSW_TFT.extractor.utils import FileSystem
+from BSW_TFT.extractor.utils import verify_request
 
 
 class League:
@@ -10,6 +10,7 @@ class League:
         self.save_mode = save_mode
         self.region = region
         self.base_url = config.BASE_URL.format(region=self.region, api_name='league', api_call='{api_call}')
+        self.data_list = []
 
     def get_high_elo(self):
 
@@ -20,10 +21,11 @@ class League:
                 headers=config.HEADER
             )
 
+            # verify_request(request=r)
+
             league_data = r.json()
-            # print(league_data)
-            # self.save(league_data)
             print(league_data)
+            self.data_list.append(league_data)
 
     def get_low_elo(self):
 
@@ -66,20 +68,6 @@ class League:
                         'entries': temp_
                     }
 
-                self.save(obj)
+                self.data_list.append(obj)
 
-    def save(self, obj):
-
-        if self.save_mode == "file":
-
-            file = FileSystem()
-            path = file.contruct_path(f'{self.region}/league')
-            print(f'path save 1: {path}')
-            file.write_to_path(path, obj)
-
-        # if self.save_mode == 'mongo':
-
-        #     self.mongo_client = MongoDB('league')
-        #     x = self.mongo_client.insert_one(obj)
-        #     print(x.inserted_id)
 

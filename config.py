@@ -22,7 +22,7 @@ FILE_SYSTEM_ROOT = '/tmp/'
 #MONGO_CONFIG = config['MONGO']
 
 ## Default regions  ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']
-REGIONS = ['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'ru', 'tr1']
+REGIONS = ['br1']
 ## Default leagues
 # {
 #     'high_elo' : ['challenger', 'grandmaster', 'master'],

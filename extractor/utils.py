@@ -3,6 +3,8 @@ import BSW_TFT.config as config
 import json
 from datetime import datetime
 import os
+import time
+
 
 
 # class MongoDB:
@@ -71,4 +73,16 @@ class FileSystem():
     def verify_root(self):
 
         return os.path.isdir(config.FILE_SYSTEM_ROOT)
+
+
+def verify_request(request):
+
+    if request.status_code == 200:
+
+        pass
+
+    if request.status_code == 503:
+        time.sleep(300)
+    
+
 
