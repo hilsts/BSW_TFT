@@ -58,6 +58,13 @@ LEAGUE_GRANDMASTER_URL = BASE_URL.format(api_name='league', api_call='grandmaste
 LEAGUE_MASTER_URL = BASE_URL.format(api_name='league', api_call='master', region='{region}')
 LEAGUE_TIERS_URL = BASE_URL.format(api_name='league', api_call='entries/{tier}/{division}', region='{region}')
 
+
 ## TFT-SUMMONER-V1
 
 SUMMONER_BY_ID = BASE_URL.format(api_name='summoner', api_call='summoners', region='{region}')
+SUMONNER_BY_NAME = BASE_URL.format(api_name='sumonner', api_call='summoners/by-name/{summoner_name}', region='{region}')
+
+## TFT-MATCH-V1
+
+MATCH_URL = BASE_URL.format(api_name='match', api_call='matches/{match_id}', region='{region}')
+MATCHES_URL = BASE_URL.format(api_name='match', api_call='matches/by-puuid/{puuid}/ids?start={start}&count={count}', region='{region}')
