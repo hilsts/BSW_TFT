@@ -62,7 +62,7 @@ LEAGUE_TIERS_URL = BASE_URL.format(api_name='league', api_call='entries/{tier}/{
 ## TFT-SUMMONER-V1
 
 SUMMONER_BY_ID = BASE_URL.format(api_name='summoner', api_call='summoners', region='{region}')
-SUMONNER_BY_NAME = BASE_URL.format(api_name='sumonner', api_call='summoners/by-name/{summoner_name}', region='{region}')
+SUMMONER_BY_NAME = BASE_URL.format(api_name='summoner', api_call='summoners/by-name/{summoner_name}', region='{region}')
 
 ## TFT-MATCH-V1
 

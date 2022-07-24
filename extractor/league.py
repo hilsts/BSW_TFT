@@ -21,9 +21,10 @@ class League:
                 headers=config.HEADER
             )
 
-            # verify_request(request=r)
+            verify_request(request=r)
 
             league_data = r.json()
+            league_data['region'] = self.region
             print(league_data)
             self.data_list.append(league_data)
 
