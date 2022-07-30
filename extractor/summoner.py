@@ -20,16 +20,20 @@ class Summoner:
         
         print(f'summoner_url: {summoner_base_url}')
 
-        r = requests.get(
-            url=summoner_base_url,
-            headers=config.HEADER
-        )
+        try:
+            r = requests.get(
+                url=summoner_base_url,
+                headers=config.HEADER
+            )
+        except Exception as e:
+            print(e)
+            return 'exception'
+            
 
         verify_request(r)
 
         return r.json()
     
-    ##def verify_eongo):xistence(self, summoner_name, m
         
         
 
