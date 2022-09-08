@@ -3,6 +3,13 @@ from BSW_TFT.extractor.summoner import Summoner
 
 
 def get_summoners_by_name(summoner_name_list):
+    '''
+    summoner_name_list: list
+    
+    Get summoner object for each summoner_name in summoner_name_list, using get_summoner_by_name and returning a summoner_object_list
+    
+    return: summoner_object_list
+    '''
     
     summoner_object_list = []
     

@@ -5,6 +5,15 @@ import BSW_TFT.config as config
 
 
 def matches_by_name(summoner_name, region='br1'):
+    
+    '''
+    summoner_name: str
+    region: str
+    
+    Get summoner_object by summoner_name, then get_matches with with summoner_puids, and for each match_id get_match and return the match_list
+    
+    return: match_list
+    '''
 
     summoner_obj = Summoner(region=region)
 
