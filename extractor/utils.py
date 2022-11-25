@@ -1,37 +1,46 @@
-#from pymongo import MongoClient
+from cmath import pi
+from pymongo import MongoClient
 import config as config
 import json
 from datetime import datetime
 import os
 
 
-# class MongoDB:
+class MongoDB:
 
-#     def __init__(self, collection):
+    def __init__(self, collection):
 
-#         mongo = config.MONGO_CONFIG
-#         client = MongoClient(mongo['host'], mongo['port'])
-#         self.collection_obj = client[mongo['dbname']][collection]
+        mongo = config.MONGO_CONFIG
+        print(type(mongo['port']))
+        client = MongoClient(f'mongodb+srv://{mongo["user"]}:{mongo["pwd"]}@bswtft1.woebl.mongodb.net/?retryWrites=true&w=majority')
+        self.collection_obj = client[mongo['dbname']][collection]
 
-#     def verify_first(self):
+    def verify_first(self):
 
-#         if self.collection_obj.count_documents({}) == 0:
-#             return True
-#         else:
-#             return False
+        if self.collection_obj.count_documents({}) == 0:
+            return True
+        else:
+            return False
 
-#     def insert_one(self, document):
+    def insert_one(self, document):
 
-#         return self.collection_obj.insert_one(document)
+        return self.collection_obj.insert_one(document)
 
-#     def insert_documents(self, document_list):
+    def insert_documents(self, document_list):
 
-#         return self.collection_obj.insert_many(document_list)
+        return self.collection_obj.insert_many(document_list)
 
-#     def query_documents(self, query):
+    def query_documents(self, query, projection):
 
-#         return self.collection_obj.find(query)
+        return self.collection_obj.find(filter=query, projection=projection)
 
+    def delete_documents(self, query):
+
+        return self.collection_obj.delete_many(query)
+
+    def aggregate(self, pipeline):
+
+        return self.collection_obj.aggregate(pipeline=pipeline)
 
 class FileSystem():
 
@@ -72,3 +81,17 @@ class FileSystem():
 
         return os.path.isdir(config.FILE_SYSTEM_ROOT)
 
+
+def verify_response(response):
+
+    status_code = response.status_code
+
+    if status_code == 200:
+
+        return response.json()
+
+
+    else:
+        data = response.json()
+        data['retry_url'] = response.url
+        return data

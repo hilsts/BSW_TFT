@@ -5,8 +5,9 @@ from extractor.league import League
 
 def extract_league():
     region = Region()
-    region.create_folders()
 
     for reg in region.regions_list:
         league = League(reg)
         league.get_high_elo()
+
+extract_league()
