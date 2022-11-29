@@ -23,7 +23,7 @@ def matches_by_name(summoner_name, region='br1'):
     matches_obj = Match(region=region)
 
     matches_json = matches_obj.get_matches(puuid=summoner_json['puuid'], count=200)
-
+    
     match_list = []
 
     for match_id in matches_json:
